@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="https://fonts.gstatic.com/s/i/materialicons/radar/v1/24px.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#000000" />
+    <title>GHOST_OS // TACTICAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <!-- Yandex Maps API (v2.1) -->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=b89b4f24-2c1e-4581-897f-94576359f470" type="text/javascript"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ghost: {
+                primary: '#00FF94',
+                secondary: '#008F5A',
+                dim: '#003322',
+                accent: '#FFD700',
+                alert: '#FF003C',
+                peer: '#00E5FF'
+              }
+            },
+            fontFamily: {
+              mono: ['"JetBrains Mono"', 'monospace'],
+              tech: ['"Share Tech Mono"', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #000;
+        color: #00FF94;
+        overflow: hidden;
+        margin: 0;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .text-glow { text-shadow: 0 0 8px rgba(0, 255, 148, 0.6); }
+      
+      video {
+        filter: contrast(1.1) brightness(1.1);
+        background: #000;
+      }
+
+      @keyframes laser-pulse {
+        0% { opacity: 0.1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(1.05); }
+        100% { opacity: 0.1; transform: scale(1); }
+      }
+
+      @keyframes scan-beam {
+        0% { transform: translateY(-100%) scaleY(1); opacity: 0; }
+        50% { opacity: 1; }
+        100% { transform: translateY(100%) scaleY(1); opacity: 0; }
+      }
+
+      .animate-laser { animation: laser-pulse 4s ease-in-out infinite; }
+      .animate-scan-beam { animation: scan-beam 3s ease-in-out infinite; }
+
+      .hud-border { border: 1px solid rgba(0, 255, 148, 0.2); }
+      
+      /* Yandex Map HUD Styling */
+      .ymaps-2-1-79-map { filter: invert(100%) hue-rotate(180deg) brightness(0.8) contrast(1.2); }
+      .ymaps-2-1-79-controls__control { display: none !important; }
+      .ymaps-2-1-79-copyright { display: none !important; }
+    </style>
+    
+    <script>
+      // CRITICAL POLYFILLS to prevent crash on 'require is not defined'
+      window.global = window;
+      window.process = { env: { NODE_ENV: 'production' }, version: '' };
+      window.require = window.require || function(x) { 
+        console.warn('Polyfilled require called for:', x); 
+        return {}; 
+      };
+    </script>
+    
+    <!-- Load Buffer via ESM to avoid CommonJS require issues -->
+    <script type="module">
+      import { Buffer } from 'https://esm.sh/buffer@6.0.3';
+      window.Buffer = window.Buffer || Buffer;
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/buffer@6.0.3/index.min.js"></script>
+    
+    <script type="importmap">
+    {
+      "imports": {
+        "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+        "react/": "https://esm.sh/react@18.2.0/",
+        "react": "https://esm.sh/react@18.2.0",
+        "react-dom": "https://esm.sh/react-dom@18.2.0",
+        "@tensorflow/tfjs": "https://esm.sh/@tensorflow/tfjs@4.10.0",
+        "@tensorflow-models/coco-ssd": "https://esm.sh/@tensorflow-models/coco-ssd@2.2.3",
+        "@google/genai": "https://esm.sh/@google/genai", 
+        "@neondatabase/serverless": "https://esm.sh/@neondatabase/serverless@0.9.0?bundle&target=es2020"
+      }
+    }
+    </script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

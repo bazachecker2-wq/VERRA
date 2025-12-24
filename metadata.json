@@ -1,0 +1,11 @@
+{
+  "name": "Copy of GHOST OS // AI NAVIGATOR",
+  "description": "Продвинутый HUD ассистент с ИИ-зрением и датчиками позиционирования.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation",
+    "bluetooth",
+    "usb"
+  ]
+}
